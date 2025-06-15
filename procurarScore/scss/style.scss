@@ -1,0 +1,259 @@
+@charset "UTF-8";
+
+// 1. Variáveis Globais (Consolidadas e Corrigidas)
+$color-primary-text: #212121;
+$color-secondary-text: #666;
+$color-placeholder: #999;
+$color-border: #e0e0e0;
+$color-input-border-focus: #007bff;
+$color-background: #f5f5f5;
+$color-card-background: #fff;
+$color-avatar-bg: #f0f0f0;
+$color-frequent-avatar-bg: #4d1e1e;
+$color-frequent-avatar-text: #eeeeee;
+$color-icon-bg: #f0f0f0;
+$color-client-badge-bg: #e0e0e0;
+$color-client-badge-selected-bg: #007bff;
+$color-client-badge-text: #000; // Cor do texto do balão
+$color-white: #fff; // AGORA DEFINIDA CORRETAMENTE
+$color-black: #000; // AGORA DEFINIDA CORRETAMENTE
+
+// 2. Mixins (Seus mixins existentes)
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+// Estilos Base do Documento
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; // Previne scrollbar no body/html
+}
+
+body {
+    @include flex-center;
+    background-color: $color-background; // Usando a variável corrigida
+}
+
+// Container Principal do Aplicativo (.phone-mockup)
+.phone-mockup {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 390px;
+    max-height: 844px;
+    background-color: $color-card-background; // Usando a variável corrigida
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2); // Sombra ajustada
+    @include flex-col;
+    overflow: hidden; // Controla o overflow do mockup
+}
+
+@media (min-width: 768px) {
+    .phone-mockup {
+        border-radius: 25px; // Bordas arredondadas para desktop mockup
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); // Sombra para desktop mockup
+    }
+}
+
+.container {
+    flex-grow: 1;
+    @include flex-col;
+    padding: 0;
+    overflow-y: auto; // TELA ROLÁVEL: Permite rolagem vertical no container principal
+    -webkit-overflow-scrolling: touch;
+}
+
+.header {
+    padding: 25px 20px 15px 20px;
+    position: relative;
+    text-align: left;
+    background-color: $color-card-background; // Usando a variável corrigida
+
+    .back-arrow {
+        position: absolute;
+        top: 25px;
+        left: 20px;
+        font-size: 24px;
+        color: $color-primary-text; // Usando a variável corrigida
+        cursor: pointer;
+    }
+
+    .title {
+        font-size: 22px;
+        font-weight: 700;
+        color: $color-primary-text; // Usando a variável corrigida
+        margin: 0;
+        margin-left: 40px;
+        line-height: 1.3;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        color: $color-secondary-text; // Usando a variável corrigida
+        margin-top: 30px;
+        margin-left: 10px;
+        line-height: 1.4;
+    }
+}
+
+.search-section {
+    padding: 10px 20px;
+    background-color: $color-card-background; // Usando a variável corrigida
+
+    .search-input {
+        width: calc(100% - 20px);
+        padding: 14px 15px;
+        font-size: 16px;
+        border: 1px solid $color-border; // Usando a variável corrigida
+        border-radius: 10px;
+        outline: none;
+        box-sizing: border-box;
+        color: $color-primary-text; // Usando a variável corrigida
+        background-color: #f8f8f8;
+
+        &::placeholder {
+            color: $color-placeholder; // Usando a variável corrigida
+        }
+
+        &:focus {
+            border-color: $color-input-border-focus; // Usando a variável corrigida
+            box-shadow: 0 0 0 2px rgba($color-input-border-focus, 0.2); // Usando a variável corrigida
+        }
+    }
+}
+
+.contacts-section {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: $color-card-background; // Usando a variável corrigida
+
+    .section-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: $color-primary-text; // Usando a variável corrigida
+        margin-top: 20px;
+        margin-bottom: 15px;
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    .frequent-contacts {
+        @include flex-row;
+        justify-content: flex-start;
+        gap: 20px;
+        margin-bottom: 30px;
+
+        .contact-card {
+            @include flex-col;
+            @include flex-center;
+            text-align: center;
+            cursor: pointer;
+
+            .avatar {
+                @include flex-center;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background-color: $color-frequent-avatar-bg; // Usando a variável corrigida
+                color: $color-frequent-avatar-text; // Usando a variável corrigida
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+
+            .name {
+                font-size: 13px;
+                color: $color-secondary-text; // Usando a variável corrigida
+                max-width: 70px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    .all-contacts {
+        .contact-item {
+            @include flex-row;
+            align-items: center;
+            padding: 12px 0;
+            cursor: pointer;
+            position: relative;
+
+            .contact-avatar {
+                @include flex-center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background-color: $color-avatar-bg; // Usando a variável corrigida
+                color: $color-primary-text; // Usando a variável corrigida
+                font-size: 16px;
+                font-weight: 500;
+                margin-right: 15px;
+            }
+
+            .contact-avatar.icon-bg {
+                background-color: $color-icon-bg; // Usando a variável corrigida
+                .material-symbols-rounded {
+                    font-size: 22px;
+                    color: $color-secondary-text; // Usando a variável corrigida
+                }
+            }
+
+            .contact-name {
+                font-size: 16px;
+                color: $color-primary-text; // Usando a variável corrigida
+                font-weight: 500;
+                flex-grow: 1;
+            }
+
+            // Estilos para os novos balões "SR" / "SRA"
+            .client-type-badges {
+                @include flex-row;
+                gap: 5px;
+                margin-left: auto;
+            }
+
+            .client-badge {
+                padding: 4px 8px;
+                background-color: $color-client-badge-bg; // Usando a variável corrigida
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.0em; /* Ajustado para um tamanho mais visível, 1.6em pode ser muito grande */
+                font-weight: 600;
+                color: $color-client-badge-text; // Usando a variável corrigida
+                transition: background-color 0.2s ease, color 0.2s ease;
+                min-width: 35px; /* Para garantir largura mínima */
+                text-align: center; /* Centraliza o texto "SR" ou "SRA" */
+
+
+                &.selected {
+                    background-color: $color-client-badge-selected-bg; // Usando a variável corrigida
+                    color: $color-white; // Usando a variável corrigida
+                }
+
+                &:hover {
+                    background-color: darken($color-client-badge-bg, 10%);
+                }
+            }
+        }
+    }
+}
